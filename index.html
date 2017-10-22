@@ -10,17 +10,49 @@
 
 <body>
     <select name='countries'>
-        <option value='default' disabled>Select a country</option>
+        <option value='default' disabled selected>Select a country</option>
     </select>
-    <script>
-        const endpoint = 'https://restcountries.eu/rest/v2/all';
-        const countries = [];
-        fetch(endpoint)
-            .then(blob => blob.json())
-            .then(data => countries.push(...data));
-        console.log(countries)
-        console.log(countries.length)
+    <h1 id='country_name'></h1>
+    <h3 id='country_capital'></h3>
+    <h3 id='country_population'></h3>
+    <div id='country_flag'>
 
+    </div>
+
+    <script>
+        const select = document.querySelector('select');
+        const country_name = document.querySelector('#country_name');
+        const country_capital = document.querySelector('#country_capital');
+        const country_population = document.querySelector('#country_population');
+        const country_flag = document.querySelector('#country_flag');
+        function getAllCountries() {
+            const endpoint = 'https://restcountries.eu/rest/v2/all';
+            fetch(endpoint)
+                .then(blob => blob.json())
+                .then(countries => {
+                    select.innerHTML += countries.map(d => `<option value="${d.name}">${d.name}</option>`);
+                });
+
+        }
+
+        function showInfo() {
+            country_name.textContent = select.value;
+            getCountryInfo(select.value)
+        }
+        select.addEventListener('change', showInfo);
+
+        function getCountryInfo(name) {
+            const endpoint = `https://restcountries.eu/rest/v2/name/${name}`;
+            fetch(endpoint)
+                .then(blob => blob.json())
+                .then(country => {
+                    country_capital.textContent = country[0].capital;
+                    country_population.textContent = `${country[0].population} habitants`;
+                    country_flag.innerHTML = `<img src=${country[0].flag}>`
+                })
+        }
+
+        getAllCountries();
 
     </script>
 </body>
