@@ -57,6 +57,7 @@
                     country_flag.innerHTML = `<img src=${country[0].flag}>`;
 
                     initMap(country[0].latlng[0], country[0].latlng[1])
+                    document.title = name;
                 })
         }
         function initMap(lat, lon) {
