@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List Of Countries</title>
+    <style>
+        #country_map {
+            width: 25%;
+            height: 400px;
+
+        }
+    </style>
 </head>
 
 <body>
@@ -15,9 +22,8 @@
     <h1 id='country_name'></h1>
     <h3 id='country_capital'></h3>
     <h3 id='country_population'></h3>
-    <div id='country_flag'>
-
-    </div>
+    <div id='country_flag'> </div>
+    <div id="country_map"></div>
 
     <script>
         const select = document.querySelector('select');
@@ -48,12 +54,27 @@
                 .then(country => {
                     country_capital.textContent = country[0].capital;
                     country_population.textContent = `${country[0].population} habitants`;
-                    country_flag.innerHTML = `<img src=${country[0].flag}>`
+                    country_flag.innerHTML = `<img src=${country[0].flag}>`;
+
+                    initMap(country[0].latlng[0], country[0].latlng[1])
                 })
+        }
+        function initMap(lat, lon) {
+            var uluru = { lat: lat, lng: lon };
+            var map = new google.maps.Map(document.getElementById('country_map'), {
+                zoom: 3,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
         }
 
         getAllCountries();
 
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY7_AwOvVF1KgOEYF7bTqQGn3tyV-LeHo">
     </script>
 </body>
 
