@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>List Of Countries</title>
+</head>
+
+<body>
+    <select name='countries'>
+        <option value='default' disabled>Select a country</option>
+    </select>
+    <script>
+        const endpoint = 'https://restcountries.eu/rest/v2/all';
+        const countries = [];
+        fetch(endpoint)
+            .then(blob => blob.json())
+            .then(data => countries.push(...data));
+        console.log(countries)
+        console.log(countries.length)
+
+
+    </script>
+</body>
+
+</html>
