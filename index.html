@@ -6,27 +6,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List Of Countries</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
     <style>
         #country_map {
-            width: 25%;
+            width: 500px;
             height: 400px;
+        }
 
+        #country_name {
+            text-align: center;
+        }
+
+        #country_flag {
+            max-width: 300px;
+        }
+
+        #map_flag {
+
+            max-width: 768px;
+            margin: 0 auto;
+
+        }
+
+        #sel1 {
+            margin-top: 30px;
+        }
+
+        .flex-container {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+
+            -webkit-flex-flow: row wrap;
+            flex-flow: row wrap;
+            justify-content: space-around;
+        }
+
+        .flex-item {
+            padding: 5px;
+            width: 200px;
+            height: 150px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .glyphicon-heart {
+            color: red;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px
+        }
+
+
+
+        @media screen and (max-width:768px) {
+
+            #country_map {
+                width: 325px;
+                height: 400px;
+
+            }
         }
     </style>
 </head>
 
 <body>
-    <select name='countries'>
-        <option value='default' disabled selected>Select a country</option>
-    </select>
-    <h1 id='country_name'></h1>
-    <h3 id='country_capital'></h3>
-    <h3 id='country_population'></h3>
-    <div id='country_flag'> </div>
-    <div id="country_map"></div>
+    <div class="container" id="wrapper">
+
+        <div class="from-grup">
+            <!-- <label for="sel1">Select a country</label> -->
+            <select name='countries' class='form-control ' id="sel1">
+                <option value='default' disabled selected>Select a country</option>
+            </select>
+        </div>
+        <h1 id='country_name'></h1>
+        <h3 id='country_capital'></h3>
+        <h3 id='country_population'></h3>
+        <div id="map_flag" class="flex-container">
+
+            <img id='country_flag' class="image-responsive flex-item" style="display:none"> </img>
+
+            <div id="country_map" class=" flex-item"></div>
+        </div>
+
+
+    </div>
+    <footer>Created with
+        <span class="glyphicon glyphicon-heart"> </span> by
+        <a href="http://twitter.com/josewhitetower" target="_blank">@josewhitetower</a>
+    </footer>
 
     <script>
-        const select = document.querySelector('select');
+        const select = document.querySelector('#sel1');
         const country_name = document.querySelector('#country_name');
         const country_capital = document.querySelector('#country_capital');
         const country_population = document.querySelector('#country_population');
@@ -52,9 +135,11 @@
             fetch(endpoint)
                 .then(blob => blob.json())
                 .then(country => {
-                    country_capital.textContent = country[0].capital;
-                    country_population.textContent = `${country[0].population} habitants`;
-                    country_flag.innerHTML = `<img src=${country[0].flag}>`;
+                    country_capital.textContent = ` Capital: ${country[0].capital}`;
+                    country_population.textContent = `Population: ${country[0].population} habitants`;
+                    const img_src = ` ${country[0].flag}`;
+                    country_flag.setAttribute("src", img_src);
+                    country_flag.style.display = 'block'
 
                     initMap(country[0].latlng[0], country[0].latlng[1])
                     document.title = name;
@@ -62,7 +147,7 @@
         }
         function initMap(lat, lon) {
             var uluru = { lat: lat, lng: lon };
-            var map = new google.maps.Map(document.getElementById('country_map'), {
+            var map = new google.maps.Map(document.querySelector('#country_map'), {
                 zoom: 3,
                 center: uluru
             });
@@ -77,6 +162,11 @@
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY7_AwOvVF1KgOEYF7bTqQGn3tyV-LeHo">
     </script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 </html>
