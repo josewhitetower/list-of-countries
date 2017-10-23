@@ -121,6 +121,8 @@
         <h1 id='country_name'></h1>
         <h3 id='country_capital'></h3>
         <h3 id='country_population'></h3>
+        <h3 id='country_region'></h3>
+        <h3 id='country_area'></h3>
         <div id="map_flag" class="flex-container">
 
             <img id='country_flag' class="flex-item" style="display:none"> </img>
@@ -141,6 +143,8 @@
         const country_capital = document.querySelector('#country_capital');
         const country_population = document.querySelector('#country_population');
         const country_flag = document.querySelector('#country_flag');
+        const country_region = document.querySelector('#country_region');
+        const country_area = document.querySelector('#country_area');
         function getAllCountries() {
             const endpoint = 'https://restcountries.eu/rest/v2/all';
             fetch(endpoint)
@@ -164,9 +168,11 @@
                 .then(country => {
                     country_capital.textContent = ` Capital: ${country[0].capital}`;
                     country_population.textContent = `Population: ${country[0].population} habitants`;
+                    country_region.textContent = `Region: ${country[0].region}`
+                    country_area.textContent = `Area: ${country[0].area} km²`
                     const img_src = ` ${country[0].flag}`;
                     country_flag.setAttribute("src", img_src);
-                    country_flag.style.display = 'block'
+                    country_flag.style.display = 'block';
 
                     initMap(country[0].latlng[0], country[0].latlng[1])
                     document.title = name;
