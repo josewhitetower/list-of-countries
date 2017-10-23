@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List Of Countries</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-
     <style>
         #country_map {
             width: 500px;
@@ -26,14 +21,40 @@
         }
 
         #map_flag {
-
             max-width: 768px;
             margin: 0 auto;
 
         }
 
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        }
+
         #sel1 {
             margin-top: 30px;
+        }
+
+        #wrapper {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            max-width: 960px;
         }
 
         .flex-container {
@@ -60,13 +81,19 @@
             text-align: center;
         }
 
-        .glyphicon-heart {
+        #heart {
             color: red;
         }
 
         footer {
             text-align: center;
             padding: 20px
+        }
+
+        a,
+        a:visited {
+            text-decoration: none;
+            color: cornflowerblue;
         }
 
 
@@ -83,7 +110,7 @@
 </head>
 
 <body>
-    <div class="container" id="wrapper">
+    <div id="wrapper">
 
         <div class="from-grup">
             <!-- <label for="sel1">Select a country</label> -->
@@ -96,7 +123,7 @@
         <h3 id='country_population'></h3>
         <div id="map_flag" class="flex-container">
 
-            <img id='country_flag' class="image-responsive flex-item" style="display:none"> </img>
+            <img id='country_flag' class="flex-item" style="display:none"> </img>
 
             <div id="country_map" class=" flex-item"></div>
         </div>
@@ -104,7 +131,7 @@
 
     </div>
     <footer>Created with
-        <span class="glyphicon glyphicon-heart"> </span> by
+        <span id='heart'>❤</span> by
         <a href="http://twitter.com/josewhitetower" target="_blank">@josewhitetower</a>
     </footer>
 
@@ -162,11 +189,7 @@
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY7_AwOvVF1KgOEYF7bTqQGn3tyV-LeHo">
     </script>
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 </html>
